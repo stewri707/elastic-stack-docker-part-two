@@ -1,3 +1,18 @@
+# Problems
+Permissions on **.yml* and **.conf*:
+- Problem
+- - *docker compose* will not create *metricbeat* container if others than **owner** have write access on the file.
+- Solution
+- - Maybe here: https://learn.microsoft.com/en-us/windows/wsl/file-permissions
+- Workaround
+- - Set ReadOnly attribute on *metricbeat.yml* and *filebeat.yml* and *logstash.conf*
+- See also:
+- - https://www.elastic.co/guide/en/beats/libbeat/current/config-file-permissions.html
+
+```
+Get-ChildItem .\* -Include *.yml,*.conf | ForEach-Object { Set-ItemProperty -Path $_.FullName -Name IsReadOnly -Value $true }
+```
+
 # Getting started with the Elastic Stack and Docker Compose: Part 2
 ## Elastic Agent, Fleet, and Elastic APM
 
